@@ -8,6 +8,7 @@ import {
   Slip10Curve,
   stringToPath,
 } from '@cosmjs/crypto'
+import { ec } from 'elliptic'
 import { toBech32, toHex, fromBech32, fromHex } from '@cosmjs/encoding'
 import {
   DirectSecp256k1HdWallet,
@@ -18,9 +19,15 @@ import {
 const bip39 = require('bip39')
 const bip32 = require('bip32')
 
-async function main() {
+/**
+ * On Cosmos, Juno, ... IBC chains
+ * Except Terra chain
+ */
+
+async function get_private_public_key_from_seed_cosmos() {
   const defaultMnemonic =
     'bright light parade capable hood chase all royal traffic asthma insect above audit toddler fancy allow reveal brick decide element knee soccer strategy flush'
+
   const path: string = `m/44'/118'/0'/0/0`
   const password: string = ''
 
@@ -46,28 +53,20 @@ async function main() {
   })
   const accs1 = await wallet1.getAccounts()
   accs1.map((acc) => console.log(acc.address))
-
-  // let mn = new EnglishMnemonic(defaultMnemonic)
-  // console.log(toHex(await Bip39.mnemonicToSeed(mn)))
-  // const masterSeed = bip32.fromSeed(seed);
-
-  // console.log(JSON.stringify(accs))
-  //   const seed = await getKeyPair(myHdPath, await wallet.serialize({algorithm: "Secp256k1"}));
-  //   console.log(toHex(seed.privkey));
 }
 
-main()
-
-// spy cruise floor tip silver project invite half they hazard forum globe country patrol furnace bleak tower multiply fit news boy disagree fish choice
-// terra1jjr37mea3tvj6s547nxuxc96sazlz2nndlev50
-
-// animal weather fancy credit place riot hip memory initial cabin filter sight boat holiday erode bamboo forget glare weasel clean between road liberty moon
-// juno155vkuxmzvu7raz7wphfzczj4yqm7pkx8797haq
-// 5c2bcaeb990cc3a0e93f7bd3fbb1fd7fb78f97f641cfa02481e19235ccf42ff3
+get_private_public_key_from_seed_cosmos()
 
 /**
- * seed: bright light parade capable hood chase all royal traffic asthma insect above audit toddler fancy allow reveal brick decide element knee soccer strategy flush
- * private key: 35d7ae0022a2a15cd8d4014174f8a6c7b2be4c174bcf136485165346b41624da
- * juno public key: juno1pdc4w98pyq44jcw8gtntqskgjsg2s0hucf2x4q
- * cosmos public key: cosmos1pdc4w98pyq44jcw8gtntqskgjsg2s0huwmfaju
+ * Didn't complete!!
  */
+
+async function get_private_public_key_from_seed_terra() {
+  const defaultMnemonic =
+    'bright light parade capable hood chase all royal traffic asthma insect above audit toddler fancy allow reveal brick decide element knee soccer strategy flush'
+
+  let mn = new EnglishMnemonic(defaultMnemonic)
+  console.log(toHex(await Bip39.mnemonicToSeed(mn)))
+}
+
+// get_private_public_key_from_seed_terra()
